@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>JixozMed — Карта организаций</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <link rel="stylesheet" href="sidebar.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="map.css" />
+
+    <script src="auth.js"></script>
+</head>
+<body>
+
+<aside class="sidebar">
+    <div class="sidebar-panel">
+        <button class="sidebar-user" id="sidebarUser" title="Личный кабинет"
+                onclick="window.location.href='profile.html';">
+            <span id="sidebarUserInitials">?</span>
+        </button>
+        <button class="sidebar-toggle" title="Свернуть">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+        <div class="sidebar-divider"></div>
+        <nav class="sidebar-nav">
+            <button class="sidebar-btn" title="Главная"
+                    onclick="window.location.href='dashboard.html';">
+                <i class="fas fa-th-large"></i>
+            </button>
+            <button class="sidebar-btn" title="Форма создания"
+                    onclick="window.location.href='index.html';">
+                <i class="fas fa-list"></i>
+            </button>
+            <button class="sidebar-btn" title="Пользователи"
+                    onclick="window.location.href='users.html';">
+                <i class="fas fa-users"></i>
+            </button>
+        </nav>
+        <button class="sidebar-admin" title="Админ-панель"
+                onclick="window.location.href='admin.html';">
+            <i class="fas fa-user-shield"></i>
+        </button>
+        <button class="sidebar-logout" title="Выход" onclick="logout();">
+            <i class="fas fa-sign-out-alt"></i>
+        </button>
+    </div>
+</aside>
+
+<div class="admin-app">
+    <main class="admin-content">
+
+        <header class="admin-header">
+            <div>
+                <h1>Карта организаций</h1>
+                <p>Расположение медицинских объединений и ваше местоположение</p>
+            </div>
+        </header>
+
+        <div class="map-toolbar">
+            <div class="map-search">
+                <i class="fas fa-search"></i>
+                <input id="searchInput" type="text" placeholder="Поиск адреса на карте..." autocomplete="off" />                <button id="searchClear" class="search-clear" title="Очистить">
+                    <i class="fas fa-times"></i>
+                </button>
+                <div id="suggestBox" class="suggest-box"></div>
+            </div>
+
+            <button id="addOrgBtn" class="map-btn">
+                <i class="fas fa-plus"></i> Добавить организацию
+            </button>
+
+            <button id="listBtn" class="map-btn">
+                <i class="fas fa-list"></i> Список организаций
+            </button>
+
+            <button id="locateBtn" class="map-btn">
+                <i class="fas fa-crosshairs"></i> Моё местоположение
+            </button>
+
+            <button id="refreshBtn" class="map-btn" title="Обновить">
+                <i class="fas fa-sync-alt"></i>
+            </button>
+        </div>
+
+        <div class="map-info" id="mapInfo">
+            <i class="fas fa-info-circle"></i>
+            <div class="map-info-content">
+                Нажмите «Добавить метку» и тапните по карте в нужном месте
+            </div>
+        </div>
+
+        <div id="map" class="map-container"></div>
+
+    </main>
+</div>
+
+<div class="marker-modal" id="markerModal">
+    <div class="marker-modal-box">
+        <h3>Новая метка</h3>
+        <p class="marker-modal-coords" id="modalCoords"></p>
+
+        <label class="marker-modal-label">Название</label>
+        <input id="modalName" type="text" placeholder="Например: Склад оборудования" maxlength="80" />
+
+        <label class="marker-modal-label">Описание (необязательно)</label>
+        <textarea id="modalDesc" rows="3" placeholder="Дополнительная информация"></textarea>
+
+        <div class="marker-modal-actions">
+            <button id="modalCancel" class="map-btn">Отмена</button>
+            <button id="modalSave" class="map-btn primary">
+                <i class="fas fa-check"></i> Сохранить
+            </button>
+        </div>
+    </div>
+</div>
+
+
+
+
+<!-- Модалка: добавление организации -->
+<div class="marker-modal" id="orgModal">
+    <div class="marker-modal-box">
+        <h3>Новая организация</h3>
+        <p class="marker-modal-coords" id="orgCoords"></p>
+
+        <label class="marker-modal-label">Название</label>
+        <input id="orgName" type="text" placeholder="Например: Amudaryo tuman tibbiyot birlashmasi" maxlength="120" />
+
+        <label class="marker-modal-label">Район</label>
+        <input id="orgDistrict" type="text" placeholder="Например: Amudaryo" maxlength="80" />
+
+        <label class="marker-modal-label">Регион</label>
+        <input id="orgRegion" type="text" placeholder="Например: Qoraqalpog'iston" maxlength="80" />
+
+        <label class="marker-modal-label">Тип</label>
+        <input id="orgType" type="text" placeholder="Например: Tibbiyot birlashmasi" maxlength="80" />
+
+        <div class="marker-modal-actions">
+            <button id="orgCancel" class="map-btn">Отмена</button>
+            <button id="orgSave" class="map-btn primary">
+                <i class="fas fa-check"></i> Сохранить
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="marker-modal" id="listModal">
+    <div class="marker-modal-box">
+        <h3>Организации</h3>
+        <p class="marker-modal-coords" id="listCount">0</p>
+
+        <div class="list-search">
+            <i class="fas fa-search"></i>
+            <input id="listSearchInput" type="text" placeholder="Поиск по названию, району..." autocomplete="off" />
+            <button id="listSearchClear" class="search-clear" title="Очистить">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <div id="listContent" class="list-content"></div>
+
+        <div class="marker-modal-actions">
+            <button id="listClose" class="map-btn">Закрыть</button>
+        </div>
+    </div>
+</div>
+
+
+<div class="marker-modal" id="equipmentModal">
+    <div class="marker-modal-box" style="max-width:560px;">
+        <h3 id="eqTitle">Оборудование</h3>
+        <p class="marker-modal-coords" id="eqSubtitle">—</p>
+        <div class="list-search" style="margin-bottom:12px;">
+            <i class="fas fa-search"></i>
+            <input id="eqSearchInput" type="text" placeholder="Поиск..." autocomplete="off" />
+            <button id="eqSearchClear" class="search-clear" title="Очистить">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div id="eqListContent" class="list-content" style="max-height:440px;"></div>
+        <div class="marker-modal-actions">
+            <button id="eqClose" class="map-btn">Закрыть</button>
+        </div>
+    </div>
+</div>
+
+
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<!-- Библиотеки для генерации .docx — ДО map.js -->
+<script src="lib/jszip.min.js"></script>
+<script src="lib/pizzip.js"></script>
+<script src="lib/docxtemplater.js"></script>
+
+<script src="supabase-client.js"></script>
+<script src="map.js"></script>
+</body>
+</html>

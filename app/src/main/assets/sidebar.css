@@ -1,0 +1,205 @@
+/* ===== ПЛАВАЮЩИЙ ФИКСИРОВАННЫЙ САЙДБАР (общий для всех страниц) ===== */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 96px;
+    padding: 12px;
+    background: transparent;
+    z-index: 100;
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    box-sizing: border-box;
+    pointer-events: none;
+}
+
+.sidebar-panel {
+    width: 72px;
+    background: #0f1e33;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 24px;
+    padding: 18px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.35);
+    position: relative;
+    pointer-events: auto;
+}
+
+.sidebar-logo {
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, #2c6df0 0%, #1a4bcf 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-size: 26px;
+    box-shadow: 0 4px 12px rgba(44, 109, 240, 0.4);
+    flex-shrink: 0;
+}
+
+.sidebar-toggle {
+    position: absolute;
+    top: 30px;
+    right: -14px;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: #1a2c47;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: #94a9c2;
+    font-size: 11px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    transition: 0.15s;
+    z-index: 5;
+}
+.sidebar-toggle:hover,
+.sidebar-toggle:active {
+    background: #1e5ec9;
+    color: #ffffff;
+}
+
+.sidebar-divider {
+    width: 40px;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.08);
+    margin: 8px 0;
+    flex-shrink: 0;
+}
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    flex: 1;
+    justify-content: flex-start;
+}
+
+.sidebar-btn {
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    background: transparent;
+    border: none;
+    color: #7d92ab;
+    font-size: 22px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.15s;
+    font-family: inherit;
+    padding: 0;
+    flex-shrink: 0;
+}
+.sidebar-btn:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: #e6edf5;
+}
+.sidebar-btn.active {
+    background: #1e5ec9;
+    color: #ffffff;
+    box-shadow: 0 4px 14px rgba(30, 94, 201, 0.4);
+}
+
+.sidebar-logout {
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    background: rgba(231, 76, 60, 0.12);
+    border: none;
+    color: #e74c3c;
+    font-size: 22px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.15s;
+    font-family: inherit;
+    padding: 0;
+    margin-top: 6px;
+    flex-shrink: 0;
+}
+.sidebar-logout:hover,
+.sidebar-logout:active {
+    background: rgba(231, 76, 60, 0.22);
+    color: #ff8a80;
+}
+
+/* ===== ОТСТУП КОНТЕНТА ПОД САЙДБАР ===== */
+/* Срабатывает на любых страницах, где есть .app или .dash-app */
+.app,
+.dash-app {
+    padding-left: 96px !important;
+    box-sizing: border-box;
+    min-height: 100vh;
+}
+
+
+
+/* ===== АВАТАР ПОЛЬЗОВАТЕЛЯ В САЙДБАРЕ ===== */
+.sidebar-user {
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    background: #1e5ec9;
+    border: none;
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.15s;
+    font-family: inherit;
+    box-shadow: 0 4px 14px rgba(30, 94, 201, 0.4);
+    margin-bottom: 6px;
+}
+
+.sidebar-user:hover {
+    transform: scale(1.05);
+}
+
+.sidebar-user:active {
+    transform: scale(0.97);
+}
+
+
+/* ===== КНОПКА АДМИНИСТРАТОРА ===== */
+.sidebar-admin {
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    background: rgba(155, 89, 182, 0.12);
+    border: none;
+    color: #b97bd1;
+    font-size: 22px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.15s;
+    font-family: inherit;
+    padding: 0;
+    flex-shrink: 0;
+    margin-top: 6px;
+}
+
+.sidebar-admin:hover,
+.sidebar-admin:active {
+    background: rgba(155, 89, 182, 0.25);
+    color: #d6a4e8;
+    transform: scale(1.05);
+}

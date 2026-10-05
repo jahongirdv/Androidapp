@@ -1,0 +1,339 @@
+/* ============================================================
+   Общие отступы — контент не прилипает к краям планшета
+   ============================================================ */
+.admin-app {
+    padding-left: 96px;          /* место под сайдбар */
+    padding-right: 40px;         /* отступ справа */
+    padding-top: 24px;           /* отступ сверху */
+    padding-bottom: 60px;        /* отступ снизу */
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.admin-content {
+    padding: 0 !important;       /* убираем старый padding, чтобы не дублировался */
+    max-width: 1100px;
+    margin: 0 auto;              /* центрируем на широких экранах */
+    width: 100%;
+}
+
+/* Заголовок страницы */
+.admin-header {
+    margin-bottom: 24px;
+}
+
+.admin-header h1 {
+    font-size: 26px;
+    font-weight: 700;
+    color: #e6edf5;
+    margin-bottom: 6px;
+    letter-spacing: -0.3px;
+}
+
+.admin-header p {
+    font-size: 14px;
+    color: #7d92ab;
+}
+
+/* ============================================================
+   Тулбар: поиск + фильтр + обновить
+   ============================================================ */
+.classifier-toolbar {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 16px;
+    align-items: center;
+    width: 100%;
+}
+
+.classifier-search {
+    flex: 1;
+    position: relative;
+    display: flex;
+    align-items: center;
+    min-width: 0;
+}
+
+.classifier-search i {
+    position: absolute;
+    left: 14px;
+    color: #4a6280;
+    font-size: 13px;
+    pointer-events: none;
+}
+
+.classifier-search input {
+    width: 100%;
+    background: #0f1e33;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 12px;
+    padding: 12px 14px 12px 40px;
+    color: #e6edf5;
+    font-size: 14px;
+    font-family: inherit;
+    outline: none;
+    transition: 0.15s;
+    box-sizing: border-box;
+}
+
+.classifier-search input:focus {
+    border-color: rgba(155, 89, 182, 0.5);
+    background: #142640;
+}
+
+.classifier-search input::placeholder {
+    color: #4a6280;
+}
+
+.classifier-filter {
+    background: #0f1e33;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 12px;
+    padding: 12px 36px 12px 14px;
+    color: #e6edf5;
+    font-size: 14px;
+    font-family: inherit;
+    outline: none;
+    cursor: pointer;
+    min-width: 160px;
+    box-sizing: border-box;
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%237d92ab' stroke-width='3'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+}
+
+.classifier-refresh {
+    background: #0f1e33;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 12px;
+    padding: 12px 16px;
+    color: #b97bd1;
+    font-size: 14px;
+    cursor: pointer;
+    transition: 0.15s;
+    flex-shrink: 0;
+}
+
+.classifier-refresh:hover {
+    background: #142640;
+    border-color: rgba(155, 89, 182, 0.4);
+}
+
+.classifier-refresh.loading i {
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* ============================================================
+   Статистика — компактные карточки в ряд
+   ============================================================ */
+.classifier-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin-bottom: 20px;
+}
+
+.stat-card {
+    background: #0f1e33;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 14px;
+    padding: 16px 20px;
+    box-sizing: border-box;
+}
+
+.stat-number {
+    font-size: 22px;
+    font-weight: 700;
+    color: #e6edf5;
+    line-height: 1.2;
+    margin-bottom: 4px;
+}
+
+.stat-label {
+    font-size: 12px;
+    color: #7d92ab;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+}
+
+/* ============================================================
+   Группы (регионы / классификации)
+   ============================================================ */
+.classifier-groups {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.group-card {
+    background: #0f1e33;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 14px;
+    overflow: hidden;
+    transition: 0.15s;
+}
+
+.group-card:hover {
+    border-color: rgba(155, 89, 182, 0.25);
+}
+
+.group-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.group-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: #e6edf5;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+}
+
+.group-title i {
+    color: #b97bd1;
+    font-size: 14px;
+    flex-shrink: 0;
+}
+
+.group-count {
+    background: rgba(155, 89, 182, 0.2);
+    color: #b97bd1;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 10px;
+    flex-shrink: 0;
+}
+
+.group-toggle {
+    color: #7d92ab;
+    font-size: 12px;
+    transition: transform 0.2s;
+    flex-shrink: 0;
+}
+
+.group-card.open .group-toggle {
+    transform: rotate(180deg);
+}
+
+.group-body {
+    display: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 4px 20px 12px;
+}
+
+.group-card.open .group-body {
+    display: block;
+}
+
+.point-item {
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.point-item:last-child {
+    border-bottom: none;
+}
+
+.point-name {
+    font-size: 14px;
+    color: #e6edf5;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    line-height: 1.4;
+}
+
+.point-name i {
+    color: #4d94e8;
+    font-size: 13px;
+    flex-shrink: 0;
+}
+
+.point-keys {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.key-chip {
+    background: rgba(77, 148, 232, 0.12);
+    color: #8bb8f0;
+    font-size: 11px;
+    padding: 3px 9px;
+    border-radius: 8px;
+    border: 1px solid rgba(77, 148, 232, 0.2);
+}
+
+/* ============================================================
+   Загрузка и пустые состояния
+   ============================================================ */
+.classifier-loading {
+    text-align: center;
+    padding: 40px 0;
+    color: #7d92ab;
+    font-size: 14px;
+}
+
+.classifier-loading i {
+    margin-right: 8px;
+    color: #b97bd1;
+}
+
+.classifier-empty {
+    text-align: center;
+    padding: 60px 20px;
+    color: #7d92ab;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.classifier-empty i {
+    font-size: 32px;
+    color: #4a6280;
+    display: block;
+    margin-bottom: 14px;
+}
+
+/* ============================================================
+   Адаптив — планшет / узкий экран
+   ============================================================ */
+@media (max-width: 900px) {
+    .admin-app {
+        padding-left: 84px;
+        padding-right: 24px;
+        padding-top: 20px;
+    }
+    .classifier-toolbar { flex-wrap: wrap; }
+    .classifier-search { min-width: 100%; }
+    .classifier-filter { flex: 1; min-width: 0; }
+    .classifier-stats { grid-template-columns: 1fr 1fr; }
+    .admin-header h1 { font-size: 22px; }
+}
+
+@media (max-width: 700px) {
+    .admin-app {
+        padding-left: 76px;
+        padding-right: 16px;
+        padding-top: 16px;
+    }
+    .classifier-stats { grid-template-columns: 1fr; }
+    .group-header { padding: 14px 16px; }
+    .group-body { padding: 4px 16px 10px; }
+    .stat-card { padding: 14px 16px; }
+    .stat-number { font-size: 20px; }
+    .admin-header h1 { font-size: 20px; }
+}

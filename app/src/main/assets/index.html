@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Форма для изменения</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.css" />
+    <link rel="stylesheet" href="css.css" />
+    <link rel="stylesheet" href="sidebar.css" />
+    <script src="auth.js"></script>
+</head>
+<body>
+
+<!-- ===== САЙДБАР ===== -->
+<aside class="sidebar">
+    <div class="sidebar-panel">
+
+        <!-- Аватар текущего пользователя -->
+        <button class="sidebar-user" id="sidebarUser" title="Личный кабинет"
+                onclick="window.location.href='profile.html';">
+            <span id="sidebarUserInitials">?</span>
+        </button>
+
+        <button class="sidebar-toggle" title="Свернуть">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+
+        <div class="sidebar-divider"></div>
+
+        <!-- Основная навигация -->
+        <nav class="sidebar-nav">
+            <button class="sidebar-btn" title="Главная"
+                    onclick="window.location.href='dashboard.html';">
+                <i class="fas fa-th-large"></i>
+            </button>
+            <button class="sidebar-btn" title="Форма создания"
+                    onclick="window.location.href='index.html';">
+                <i class="fas fa-list"></i>
+            </button>
+            <button class="sidebar-btn" title="Пользователи"
+                    onclick="window.location.href='users.html';">
+                <i class="fas fa-users"></i>
+            </button>
+        </nav>
+
+        <!-- Кнопка администратора (перед выходом) -->
+        <button class="sidebar-admin" title="Админ-панель"
+                onclick="window.location.href='admin.html';">
+            <i class="fas fa-user-shield"></i>
+        </button>
+
+        <!-- Кнопка выхода -->
+        <button class="sidebar-logout" title="Выход" onclick="logout();">
+            <i class="fas fa-sign-out-alt"></i>
+        </button>
+
+    </div>
+</aside>
+
+<!-- ===== ОСНОВНОЙ КОНТЕНТ ===== -->
+<div class="app">
+
+    <main class="content">
+
+        <header class="page-header">
+            <span class="crumb">Главное меню</span>
+            <span class="crumb-sep">•</span>
+            <span class="crumb-current">Форма для изменения</span>
+        </header>
+
+        <!-- ===== СПИСОК УСТРОЙСТВ / ПОИСК ===== -->
+        <section class="section device-search-section">
+            <h2 class="device-search-title">Список устройств</h2>
+
+            <div class="device-search-grid">
+                <div class="form-group">
+                    <input type="text" id="searchSerialInput" placeholder="Серийный номер" autocomplete="off" />
+                </div>
+                <div class="form-group">
+                    <input type="text" id="searchInventoryInput" placeholder="Инвентарный номер" autocomplete="off" />
+                </div>
+                <div class="form-group date-input-group">
+                    <input type="text" id="searchManufactureDate" placeholder="Дата производства" onfocus="(this.type='date')" onblur="if(!this.value)this.type='text'" />
+                    <i class="fas fa-calendar-alt calendar-icon"></i>
+                </div>
+                <div class="form-group date-input-group">
+                    <input type="text" id="searchInstallDate" placeholder="Дата установки" onfocus="(this.type='date')" onblur="if(!this.value)this.type='text'" />
+                    <i class="fas fa-calendar-alt calendar-icon"></i>
+                </div>
+            </div>
+
+            <div style="margin: 12px 0;">
+                <a href="javascript:void(0)" class="btn-expand-filters" id="toggleFiltersBtn" onclick="toggleExpandedFilters()">
+                    <i class="fas fa-chevron-down"></i> Расширить фильтры
+                </a>
+            </div>
+
+            <!-- Дополнительные фильтры -->
+            <div id="expandedFilters" class="expanded-filters" style="display: none;">
+                <div class="filter-divider">
+                    <span>Дополнительные фильтры</span>
+                </div>
+
+                <div class="device-search-grid grid-3-col">
+                    <div class="form-group">
+                        <select id="searchClassification">
+                            <option value="">Классификация</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <select id="searchSection">
+                            <option value="">Раздел классификации</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <select id="searchPoint">
+                            <option value="">Пункт классификации</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <select id="searchRegion">
+                            <option value="">Регион</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <select id="searchDistrict">
+                            <option value="">Район</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <select id="searchOrganization">
+                            <option value="">Организация</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <select id="searchResponsible">
+                            <option value="">Ответственное лицо</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <select id="searchCountry">
+                            <option value="">Страна производителя</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="searchUzasboInput" placeholder="Инвентарный номер, зарегистрированный в системе UzASBO" />
+                    </div>
+
+                    <div class="form-group date-input-group">
+                        <input type="text" id="searchExpiryDate" placeholder="Истечение срока действия оборудования" onfocus="(this.type='date')" onblur="if(!this.value)this.type='text'" />
+                        <i class="fas fa-calendar-alt calendar-icon"></i>
+                    </div>
+                    <div class="form-group">
+                        <select id="searchCondition">
+                            <option value="">Состояние оборудования</option>
+                            <option value="Исправен (в рабочем состоянии)">Исправен (в рабочем состоянии)</option>
+                            <option value="Неисправен (требует ремонта)">Неисправен (требует ремонта)</option>
+                            <option value="Неисправен или непригоден для использования">Неисправен или непригоден для использования</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="device-search-btns" style="margin-top: 18px;">
+                <button type="button" class="btn-search-primary" id="searchDeviceBtn" onclick="performDeviceSearch()">
+                    <i class="fas fa-search"></i> Поиск
+                </button>
+                <button type="button" class="btn-search-clear" id="clearDeviceBtn" onclick="clearDeviceSearch()">
+                    <i class="fas fa-trash-alt"></i> Очистить
+                </button>
+            </div>
+        </section>
+
+
+
+        <!-- ===== БЛОК ТАБЛИЦЫ УСТРОЙСТВ ===== -->
+        <section class="section device-table-section">
+            <div class="table-header-actions">
+                <div class="table-actions-right">
+                    <button type="button" class="btn-table-action" onclick="exportDeviceData()"><i class="fas fa-file-export"></i> Экспорт</button>
+                    <button type="button" class="btn-table-action" onclick="downloadReport()"><i class="fas fa-file-download"></i> Скачать отчёт</button>
+                    <button type="button" class="btn-table-primary" onclick="createNewDevice()"><i class="fas fa-plus"></i> Создать</button>
+                </div>
+            </div>
+
+            <div class="table-responsive">
+                <table class="devices-table">
+                    <thead>
+                        <tr>
+                            <th>Название</th>
+                            <th>Модель</th>
+                            <th>Инвентарный номер</th>
+                            <th>Статус</th>
+                            <th>Организация</th>
+                            <th>Тип классификации</th>
+                            <th>Дата создания</th>
+                            <th>Кто внёс оборудование</th>
+                            <th>Фото</th>
+                            <th>Действия</th>
+                        </tr>
+                    </thead>
+                    <tbody id="devicesTableBody">
+                        <!-- Сюда подгрузятся строки из CSV -->
+                    </tbody>
+                </table>
+            </div>
+            <div id="tablePagination" class="table-pagination"></div>
+        </section>
+
+        <!-- ===== ИЗОБРАЖЕНИЯ УСТРОЙСТВА ===== -->
+        <section class="section images-section" style="display: none;">
+            <h2 class="section-title">Изображения устройства</h2>
+
+            <input type="file" id="cameraInput" accept="image/*" capture="environment" style="display: none;" />
+            <input type="file" id="galleryInput" accept="image/*" multiple style="display: none;" />
+
+            <div class="upload-row">
+                <button class="btn-upload" type="button"
+                        onclick="document.getElementById('sourceModal').style.display='block';">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    Загрузить файлы
+                </button>
+                <div class="thumbnails" id="thumbnails"></div>
+            </div>
+        </section>
+
+        <!-- ===== ФОРМА ===== -->
+        <section class="section form-section" style="display: none;">
+
+            <div class="form-grid form-grid-3">
+                <div class="form-group">
+                    <label>Классификация</label>
+                    <input type="text" id="classificationInput" placeholder="Автоматически подставится" readonly />
+                </div>
+                <div class="form-group">
+                    <label>Раздел</label>
+                    <input type="text" id="sectionInput" placeholder="Автоматически подставится" readonly />
+                </div>
+                <div class="form-group">
+                    <label>Пункт</label>
+                    <input type="text" id="pointInput" placeholder="Автоматически подставится" readonly />
+                </div>
+            </div>
+
+            <div class="form-grid form-grid-2">
+                <div class="form-group">
+                    <label>Фирма производитель</label>
+                    <input type="text" id="firmInput" placeholder="Автоматически подставится" readonly />
+                </div>
+                <div class="form-group">
+                    <label>Страна фирмы производителя</label>
+                    <select id="firmCountrySelect">
+                        <option>Russia</option>
+                        <option>USA</option>
+                        <option>Germany</option>
+                        <option>Great Britain</option>
+                        <option>Uzbekistan</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-grid form-grid-2">
+                <div class="form-group">
+                    <label>Страна производства</label>
+                    <select id="countryInput">
+                        <option>Russia</option>
+                        <option>USA</option>
+                        <option>Germany</option>
+                        <option>Great Britain</option>
+                        <option>Uzbekistan</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Наименование оборудования или прибора</label>
+                    <div class="input-with-suggestions">
+                        <input type="text" id="equipmentName" placeholder="Например: кислородный концентратор" autocomplete="off" />
+                        <div class="suggestions-dropdown" id="suggestionsList"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-grid form-grid-2">
+                <div class="form-group">
+                    <label>Модель оборудования</label>
+                    <div class="input-with-suggestions">
+                        <input type="text" id="modelInput" placeholder="Например: С856" autocomplete="off" />
+                        <div class="suggestions-dropdown" id="modelSuggestionsList"></div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Серийный/Заводской номер</label>
+                    <input type="text" id="serialInput" placeholder="Введите серийный номер" />
+                </div>
+            </div>
+
+            <div class="form-grid form-grid-2">
+                <div class="form-group">
+                    <label>Инвентарный номер, зарегистрированный в системе UzASBO</label>
+                    <input type="text" id="inventoryInput" placeholder="Например: 2212223000018" />
+                </div>
+            </div>
+
+            <div class="form-grid form-grid-2">
+                <div class="form-group">
+                    <label>Наименование оборудования, зарегистрированного в системе UzASBO</label>
+                    <input type="text" id="uzasboNameInput" placeholder="Введите наименование из UzASBO" />
+                </div>
+            </div>
+
+            <div class="form-actions" style="margin-top: 28px; display: flex; gap: 14px; justify-content: flex-end;">
+                <button type="button" class="btn-search-clear" onclick="backToList()" style="padding: 12px 24px; border-radius: 12px; font-size: 15px; cursor: pointer;">Отмена</button>
+                <button type="button" class="btn-search-primary" onclick="saveCurrentDevice()" style="padding: 12px 28px; border-radius: 12px; font-size: 15px; cursor: pointer; display: inline-flex; align-items: center; gap: 8px;"><i class="fas fa-save"></i> Сохранить</button>
+            </div>
+
+        </section>
+
+    </main>
+</div>
+
+<!-- Скрытый элемент -->
+<input type="hidden" id="countryFirmInput" />
+
+<!-- ===== РЕДАКТОР (Cropper) ===== -->
+<div id="editorModal" class="modal-editor">
+    <div class="editor-topbar">
+        <button id="cancelEditBtn" type="button" class="editor-btn-text">
+            <i class="fas fa-times"></i> Отмена
+        </button>
+        <div class="editor-tools">
+            <button id="rotateLeftBtn" type="button" class="editor-btn-icon"><i class="fas fa-undo"></i></button>
+            <button id="rotateRightBtn" type="button" class="editor-btn-icon"><i class="fas fa-redo"></i></button>
+            <button id="flipHBtn" type="button" class="editor-btn-icon"><i class="fas fa-arrows-alt-h"></i></button>
+        </div>
+        <button id="saveEditBtn" type="button" class="editor-btn-save">
+            <i class="fas fa-check"></i> Сохранить
+        </button>
+    </div>
+    <div class="editor-canvas">
+        <img id="editorImage" />
+    </div>
+</div>
+
+<!-- ===== ПРОСМОТР ФОТО ===== -->
+<div id="viewerModal" style="display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:#000; z-index:999999; overflow:hidden;">
+
+    <div id="viewerImage"
+         style="position:absolute; top:0; left:0; right:0; bottom:0;
+                background-color:#000;
+                background-position:center center;
+                background-repeat:no-repeat;
+                background-size:contain;
+                transform-origin:center center;
+                user-select:none; -webkit-user-drag:none;
+                touch-action:none;">
+    </div>
+
+    <div id="viewerCounter"
+         style="position:absolute; top:16px; left:20px; z-index:10; color:#fff; background:rgba(255,255,255,0.15); padding:8px 18px; border-radius:20px; font-size:16px; font-weight:500;">
+        1 / 1
+    </div>
+
+    <button id="viewerMenuBtn" type="button"
+            style="position:absolute; top:16px; right:20px; z-index:10; width:48px; height:48px; border-radius:50%; background:rgba(255,255,255,0.15); color:#fff; border:none; font-size:20px; cursor:pointer; display:flex; align-items:center; justify-content:center;">
+        <i class="fas fa-ellipsis-v"></i>
+    </button>
+
+    <div id="viewerActionsMenu" style="display:none; position:absolute; top:76px; right:20px; background:#1a2c47; border-radius:14px; min-width:240px; padding:6px 0; z-index:20; box-shadow:0 12px 40px rgba(0,0,0,0.6);">
+        <div id="actionCrop" style="padding:14px 20px; color:#e6edf5; cursor:pointer;">Обрезать</div>
+        <div id="actionRotateLeft" style="padding:14px 20px; color:#e6edf5; cursor:pointer;">Повернуть влево</div>
+        <div id="actionRotateRight" style="padding:14px 20px; color:#e6edf5; cursor:pointer;">Повернуть вправо</div>
+        <div id="actionFlipH" style="padding:14px 20px; color:#e6edf5; cursor:pointer;">Отразить зеркально</div>
+        <div id="actionDelete" style="padding:14px 20px; color:#ff8a80; cursor:pointer;">Удалить</div>
+    </div>
+</div>
+
+<!-- ===== МЕНЮ ВЫБОРА ИСТОЧНИКА ФОТО ===== -->
+<div id="sourceModal" style="display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.75); z-index:9999999; overflow:hidden;">
+
+    <div style="position:absolute; left:0; right:0; bottom:0; background:#0f1e33; border-radius:24px 24px 0 0; padding:12px 20px 24px; max-width:520px; margin:0 auto; box-shadow:0 -8px 40px rgba(0,0,0,0.6);">
+
+        <div style="width:44px; height:4px; background:rgba(255,255,255,0.2); border-radius:4px; margin:6px auto 18px;"></div>
+
+        <h3 style="font-size:18px; font-weight:500; color:#e6edf5; text-align:center; margin:0 0 20px 0;">Добавить изображение</h3>
+
+        <button type="button"
+                onclick="document.getElementById('sourceModal').style.display='none'; document.getElementById('cameraInput').click();"
+                style="width:100%; display:flex; align-items:center; gap:16px; background:#16273d; border:1px solid rgba(255,255,255,0.06); border-radius:16px; padding:16px 18px; margin-bottom:10px; cursor:pointer; text-align:left; font-family:inherit; color:inherit;">
+            <div style="width:52px; height:52px; border-radius:14px; background:rgba(77,148,232,0.15); color:#4d94e8; display:flex; align-items:center; justify-content:center; font-size:22px; flex-shrink:0;">
+                <i class="fas fa-camera"></i>
+            </div>
+            <div style="flex:1; display:flex; flex-direction:column; gap:3px;">
+                <span style="font-size:16px; font-weight:500; color:#e6edf5;">Сделать снимок</span>
+                <span style="font-size:13px; color:#7d92ab;">Открыть камеру устройства</span>
+            </div>
+            <i class="fas fa-chevron-right" style="color:#4a6280; font-size:14px;"></i>
+        </button>
+
+        <button type="button"
+                onclick="document.getElementById('sourceModal').style.display='none'; document.getElementById('galleryInput').click();"
+                style="width:100%; display:flex; align-items:center; gap:16px; background:#16273d; border:1px solid rgba(255,255,255,0.06); border-radius:16px; padding:16px 18px; margin-bottom:10px; cursor:pointer; text-align:left; font-family:inherit; color:inherit;">
+            <div style="width:52px; height:52px; border-radius:14px; background:rgba(155,89,182,0.15); color:#b97bd1; display:flex; align-items:center; justify-content:center; font-size:22px; flex-shrink:0;">
+                <i class="fas fa-images"></i>
+            </div>
+            <div style="flex:1; display:flex; flex-direction:column; gap:3px;">
+                <span style="font-size:16px; font-weight:500; color:#e6edf5;">Выбрать из галереи</span>
+                <span style="font-size:13px; color:#7d92ab;">Найти фото среди сохранённых</span>
+            </div>
+            <i class="fas fa-chevron-right" style="color:#4a6280; font-size:14px;"></i>
+        </button>
+
+        <button type="button"
+                onclick="document.getElementById('sourceModal').style.display='none';"
+                style="width:100%; background:transparent; border:1px solid rgba(255,255,255,0.1); color:#94a9c2; padding:14px; border-radius:14px; font-size:16px; font-family:inherit; cursor:pointer; margin-top:6px;">
+            Отмена
+        </button>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.js"></script>
+<script src="supabase-client.js"></script>
+<script src="equipment_rows.js"></script>
+<script src="type.js"></script>
+</body>
+</html>

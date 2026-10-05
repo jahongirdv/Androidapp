@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>JixozMed — Дашборд</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <link rel="stylesheet" href="dashboard.css" />
+    <link rel="stylesheet" href="sidebar.css" />
+    <script src="auth.js"></script>
+</head>
+<body>
+
+<!-- ===== САЙДБАР ===== -->
+<aside class="sidebar">
+    <div class="sidebar-panel">
+
+        <!-- Аватар текущего пользователя -->
+        <button class="sidebar-user" id="sidebarUser" title="Личный кабинет"
+                onclick="window.location.href='profile.html';">
+            <span id="sidebarUserInitials">?</span>
+        </button>
+
+
+
+        <div class="sidebar-divider"></div>
+
+        <!-- Основная навигация -->
+        <nav class="sidebar-nav">
+            <button class="sidebar-btn" title="Главная"
+                    onclick="window.location.href='dashboard.html';">
+                <i class="fas fa-th-large"></i>
+            </button>
+            <button class="sidebar-btn" title="Форма создания"
+                    onclick="window.location.href='index.html';">
+                <i class="fas fa-list"></i>
+            </button>
+            <button class="sidebar-btn" title="Пользователи"
+                    onclick="window.location.href='users.html';">
+                <i class="fas fa-users"></i>
+            </button>
+        </nav>
+
+        <!-- Кнопка администратора (перед выходом) -->
+        <button class="sidebar-admin" title="Админ-панель"
+                onclick="window.location.href='admin.html';">
+            <i class="fas fa-user-shield"></i>
+        </button>
+
+        <!-- Кнопка выхода -->
+        <button class="sidebar-logout" title="Выход" onclick="logout();">
+            <i class="fas fa-sign-out-alt"></i>
+        </button>
+
+    </div>
+</aside>
+
+<!-- ===== ОСНОВНОЙ КОНТЕНТ ===== -->
+<div class="dash-app">
+
+    <main class="dash-content">
+
+        <!-- Фильтры -->
+        <div class="dash-filters">
+            <select class="dash-filter"><option>Район</option></select>
+            <select class="dash-filter"><option>Организация</option></select>
+            <select class="dash-filter"><option>Классификация</option></select>
+            <select class="dash-filter"><option>Раздел</option></select>
+            <select class="dash-filter"><option>Пункт</option></select>
+        </div>
+
+        <!-- Статистические карточки -->
+        <div class="dash-stats">
+            <div class="stat-card stat-total">
+                <div class="stat-icon"><i class="fas fa-clipboard-list"></i></div>
+                <div class="stat-body">
+                    <div class="stat-number">22 153</div>
+                    <div class="stat-title">Статистика оборудования</div>
+                    <div class="stat-desc">Общее количество устройств в системе</div>
+                </div>
+            </div>
+
+            <div class="stat-card stat-working">
+                <div class="stat-icon"><i class="fas fa-check-circle"></i></div>
+                <div class="stat-body">
+                    <div class="stat-number">18 090</div>
+                    <div class="stat-title">В рабочем состоянии</div>
+                    <div class="stat-desc">Устройства работают без нарушений</div>
+                </div>
+            </div>
+
+            <div class="stat-card stat-repair">
+                <div class="stat-icon"><i class="fas fa-tools"></i></div>
+                <div class="stat-body">
+                    <div class="stat-number">1 053</div>
+                    <div class="stat-title">Нуждается в ремонте</div>
+                    <div class="stat-desc">Требуют технического вмешательства</div>
+                </div>
+            </div>
+
+            <div class="stat-card stat-broken">
+                <div class="stat-icon"><i class="fas fa-minus-circle"></i></div>
+                <div class="stat-body">
+                    <div class="stat-number">3 010</div>
+                    <div class="stat-title">Не пригодно для использования</div>
+                    <div class="stat-desc">Не используются или списаны</div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+</div>
+
+<script src="dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,146 @@
+/* ============================================================
+   Панель параметров
+   ============================================================ */
+.tpl-toolbar {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 12px;
+    background: #0f1e33;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 14px;
+    padding: 16px 18px;
+    margin-bottom: 22px;
+}
+
+.tpl-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.tpl-field > span {
+    font-size: 11px;
+    color: #7d92ab;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+}
+
+.tpl-field input,
+.tpl-field select {
+    width: 100%;
+    background: #0a1628;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    padding: 11px 13px;
+    color: #e6edf5;
+    font-size: 13px;
+    font-family: inherit;
+    outline: none;
+    transition: 0.15s;
+}
+
+.tpl-field input:focus,
+.tpl-field select:focus {
+    border-color: rgba(185, 123, 209, 0.6);
+    background: #142640;
+}
+
+.tpl-field input::placeholder { color: #4a6280; }
+
+.tpl-field select {
+    appearance: none;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6'><path fill='%237d92ab' d='M0 0l5 6 5-6z'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 36px;
+}
+
+/* ============================================================
+   Сетка карточек шаблонов
+   ============================================================ */
+.tpl-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 16px;
+    margin-bottom: 22px;
+}
+
+.tpl-card {
+    background: #0f1e33;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 16px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    transition: 0.15s;
+}
+
+.tpl-card:hover {
+    border-color: rgba(185, 123, 209, 0.4);
+    transform: translateY(-2px);
+}
+
+.tpl-card-body h3 {
+    font-size: 15px;
+    font-weight: 600;
+    color: #e6edf5;
+    margin-bottom: 6px;
+    line-height: 1.3;
+}
+
+.tpl-card-body p {
+    font-size: 12px;
+    color: #7d92ab;
+    line-height: 1.5;
+}
+
+.tpl-download {
+    margin-top: auto;
+    padding: 11px 16px;
+    background: rgba(185, 123, 209, 0.15);
+    border: 1px solid rgba(185, 123, 209, 0.4);
+    border-radius: 10px;
+    color: #d6a6e8;
+    font-size: 13px;
+    font-family: inherit;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: 0.15s;
+}
+
+.tpl-download:hover  { background: rgba(185, 123, 209, 0.3); }
+.tpl-download:active { transform: scale(0.98); }
+
+/* Цвет иконки карточки «Акт списания» */
+.admin-icon-wo {
+    background: rgba(231, 76, 60, 0.18);
+    color: #ff8a80;
+}
+
+/* Подсказка */
+.tpl-hint {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    background: #0f1e33;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 12px;
+    padding: 14px 18px;
+    font-size: 12px;
+    color: #b6c7da;
+    line-height: 1.6;
+}
+
+.tpl-hint i {
+    color: #b97bd1;
+    margin-top: 3px;
+    flex-shrink: 0;
+}
+
+@media (max-width: 700px) {
+    .tpl-grid { grid-template-columns: 1fr; }
+}

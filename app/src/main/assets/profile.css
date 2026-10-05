@@ -1,0 +1,196 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+    width: 100%;
+    min-height: 100vh;
+    background: #0a1628;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+    color: #e6edf5;
+    overflow-x: hidden;
+}
+
+.profile-app {
+    min-height: 100vh;
+    padding-left: 96px;
+    box-sizing: border-box;
+}
+
+.profile-content {
+    padding: 28px 36px 60px;
+    max-width: 900px;
+}
+
+/* Шапка */
+.profile-header-card {
+    background: linear-gradient(135deg, #1e5ec9 0%, #0f3a80 100%);
+    border-radius: 22px;
+    padding: 32px 28px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    margin-bottom: 24px;
+    box-shadow: 0 10px 40px rgba(30, 94, 201, 0.3);
+    flex-wrap: wrap;
+}
+
+.profile-avatar-big {
+    width: 96px;
+    height: 96px;
+    border-radius: 24px;
+    background: rgba(255, 255, 255, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 36px;
+    font-weight: 700;
+    color: #ffffff;
+    border: 3px solid rgba(255, 255, 255, 0.25);
+    flex-shrink: 0;
+}
+
+.profile-info {
+    flex: 1;
+    min-width: 200px;
+}
+
+.profile-info h1 {
+    font-size: 24px;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 8px;
+    letter-spacing: -0.3px;
+}
+
+.profile-role {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.15);
+    color: #ffffff;
+    padding: 5px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 500;
+    margin-bottom: 6px;
+}
+
+.profile-region {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.75);
+}
+
+/* Секции */
+.profile-section {
+    background: #0f1e33;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 20px;
+    padding: 24px 26px;
+    margin-bottom: 20px;
+}
+
+.profile-section h2 {
+    font-size: 17px;
+    font-weight: 600;
+    color: #e6edf5;
+    margin-bottom: 18px;
+}
+
+.profile-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.profile-row:last-child { border-bottom: none; }
+
+.profile-label {
+    font-size: 14px;
+    color: #7d92ab;
+}
+
+.profile-value {
+    font-size: 15px;
+    color: #e6edf5;
+    font-weight: 500;
+    text-align: right;
+}
+
+/* Действия */
+.profile-action {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: #16273d;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 14px;
+    padding: 16px 18px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: 0.15s;
+    font-family: inherit;
+    text-align: left;
+    color: inherit;
+}
+
+.profile-action:last-child { margin-bottom: 0; }
+
+.profile-action:hover {
+    background: #1a2e47;
+    border-color: rgba(77, 148, 232, 0.3);
+}
+
+.profile-action > i:first-child {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    background: rgba(77, 148, 232, 0.15);
+    color: #4d94e8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+}
+
+.profile-action-text {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.profile-action-name {
+    font-size: 15px;
+    font-weight: 500;
+    color: #e6edf5;
+}
+
+.profile-action-desc {
+    font-size: 13px;
+    color: #7d92ab;
+}
+
+.profile-action-arrow {
+    color: #4a6280;
+    font-size: 14px;
+}
+
+.profile-action-logout > i:first-child {
+    background: rgba(231, 76, 60, 0.15);
+    color: #ff8a80;
+}
+
+.profile-action-logout .profile-action-name {
+    color: #ff8a80;
+}
+
+/* Адаптив */
+@media (max-width: 700px) {
+    .profile-content { padding: 20px 16px 60px; }
+    .profile-header-card { padding: 24px 20px; }
+    .profile-avatar-big { width: 76px; height: 76px; font-size: 28px; }
+    .profile-info h1 { font-size: 20px; }
+}

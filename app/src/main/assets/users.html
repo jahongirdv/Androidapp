@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>JixozMed — Пользователи</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <link rel="stylesheet" href="users.css" />
+    <link rel="stylesheet" href="sidebar.css" />
+    <script src="auth.js"></script>
+</head>
+<body>
+
+<!-- ===== САЙДБАР ===== -->
+<aside class="sidebar">
+    <div class="sidebar-panel">
+
+        <!-- Аватар текущего пользователя -->
+        <button class="sidebar-user" id="sidebarUser" title="Личный кабинет"
+                onclick="window.location.href='profile.html';">
+            <span id="sidebarUserInitials">?</span>
+        </button>
+
+        <button class="sidebar-toggle" title="Свернуть">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+
+        <div class="sidebar-divider"></div>
+
+        <!-- Основная навигация -->
+        <nav class="sidebar-nav">
+            <button class="sidebar-btn" title="Главная"
+                    onclick="window.location.href='dashboard.html';">
+                <i class="fas fa-th-large"></i>
+            </button>
+            <button class="sidebar-btn" title="Форма создания"
+                    onclick="window.location.href='index.html';">
+                <i class="fas fa-list"></i>
+            </button>
+            <button class="sidebar-btn" title="Пользователи"
+                    onclick="window.location.href='users.html';">
+                <i class="fas fa-users"></i>
+            </button>
+        </nav>
+
+        <!-- Кнопка администратора (перед выходом) -->
+        <button class="sidebar-admin" title="Админ-панель"
+                onclick="window.location.href='admin.html';">
+            <i class="fas fa-user-shield"></i>
+        </button>
+
+        <!-- Кнопка выхода -->
+        <button class="sidebar-logout" title="Выход" onclick="logout();">
+            <i class="fas fa-sign-out-alt"></i>
+        </button>
+
+    </div>
+</aside>
+
+<!-- ===== ОСНОВНОЙ КОНТЕНТ ===== -->
+<div class="users-app">
+
+    <main class="users-content">
+
+        <header class="users-header">
+            <div>
+                <h1>Пользователи системы</h1>
+                <p>Всего: <strong id="usersCount">0</strong></p>
+            </div>
+            <button class="users-btn-add" onclick="openAddUserModal();">
+                <i class="fas fa-plus"></i> Добавить пользователя
+            </button>
+        </header>
+
+        <!-- Фильтры -->
+        <div class="users-toolbar">
+            <div class="users-search">
+                <i class="fas fa-search"></i>
+                <input type="text" id="searchInput" placeholder="Поиск по Ф.И.О., региону..." />
+            </div>
+            <select class="users-filter" id="filterRegion">
+                <option value="">Все регионы</option>
+                <option value="Qoraqalpog'iston Respublikasi">Qoraqalpog'iston Respublikasi</option>
+                <option value="Toshkent shahri">Toshkent shahri</option>
+                <option value="Toshkent viloyati">Toshkent viloyati</option>
+                <option value="Samarqand viloyati">Samarqand viloyati</option>
+                <option value="Buxoro viloyati">Buxoro viloyati</option>
+                <option value="Andijon viloyati">Andijon viloyati</option>
+            </select>
+            <select class="users-filter" id="filterRole">
+                <option value="">Все роли</option>
+                <option value="Регион админ">Регион админ</option>
+                <option value="Харидлар маркази">Харидлар маркази</option>
+                <option value="Туман админ">Туман админ</option>
+                <option value="Оператор">Оператор</option>
+            </select>
+        </div>
+
+        <!-- Таблица -->
+        <div class="users-table-wrap">
+            <table class="users-table">
+                <thead>
+                <tr>
+                    <th>Ф.И.О.</th>
+                    <th>Роли</th>
+                    <th>Регионы</th>
+                    <th>Районы</th>
+                    <th>Организации</th>
+                    <th>Дата создания</th>
+                    <th>Действия</th>
+                </tr>
+                </thead>
+                <tbody id="usersTableBody"></tbody>
+            </table>
+        </div>
+
+        <!-- Пагинация -->
+        <div class="users-pagination" id="usersPagination"></div>
+
+    </main>
+</div>
+
+<!-- ===== МОДАЛЬНОЕ ОКНО "ДОБАВИТЬ ПОЛЬЗОВАТЕЛЯ" ===== -->
+<div id="addUserModal" style="display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.75); z-index:999999; align-items:center; justify-content:center; padding:20px;">
+
+    <div style="width:100%; max-width:520px; max-height:90vh; overflow-y:auto; background:#0f1e33; border-radius:20px; padding:24px 22px; box-shadow:0 20px 60px rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.08);">
+
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:22px;">
+            <h3 style="font-size:20px; font-weight:600; color:#e6edf5; margin:0;">Новый пользователь</h3>
+            <button type="button" onclick="closeAddUserModal();"
+                    style="width:36px; height:36px; border-radius:50%; background:rgba(255,255,255,0.06); border:none; color:#94a9c2; font-size:16px; cursor:pointer;">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <div class="modal-field">
+            <label>Ф.И.О. *</label>
+            <input type="text" id="newName" placeholder="Фамилия Имя Отчество" />
+        </div>
+
+        <div class="modal-field">
+            <label>Логин *</label>
+            <input type="text" id="newLogin" placeholder="например: i.ivanov" />
+        </div>
+
+        <div class="modal-field">
+            <label>Пароль *</label>
+            <input type="text" id="newPassword" placeholder="введите пароль" />
+        </div>
+
+        <div class="modal-field">
+            <label>Email</label>
+            <input type="email" id="newEmail" placeholder="user@jixozmed.uz" />
+        </div>
+
+        <div class="modal-field">
+            <label>Регион</label>
+            <select id="newRegion">
+                <option value="">— выберите —</option>
+                <option value="Qoraqalpog'iston Respublikasi">Qoraqalpog'iston Respublikasi</option>
+                <option value="Toshkent shahri">Toshkent shahri</option>
+                <option value="Toshkent viloyati">Toshkent viloyati</option>
+                <option value="Samarqand viloyati">Samarqand viloyati</option>
+                <option value="Buxoro viloyati">Buxoro viloyati</option>
+            </select>
+        </div>
+
+        <div class="modal-field">
+            <label>Роль</label>
+            <select id="newRole">
+                <option value="Регион админ">Регион админ</option>
+                <option value="Харидлар маркази">Харидлар маркази</option>
+                <option value="Туман админ">Туман админ</option>
+                <option value="Оператор">Оператор</option>
+            </select>
+        </div>
+
+        <div class="modal-field">
+            <label>Организация</label>
+            <input type="text" id="newOrganization" placeholder="Название организации" />
+        </div>
+
+        <div id="addUserError" class="modal-error"></div>
+
+        <div style="display:flex; gap:12px; margin-top:22px;">
+            <button type="button" onclick="closeAddUserModal();"
+                    style="flex:1; padding:14px; background:transparent; border:1px solid rgba(255,255,255,0.1); color:#94a9c2; border-radius:14px; font-size:15px; font-family:inherit; cursor:pointer;">
+                Отмена
+            </button>
+            <button type="button" onclick="saveNewUser();"
+                    style="flex:1; padding:14px; background:#1e5ec9; border:none; color:white; border-radius:14px; font-size:15px; font-family:inherit; cursor:pointer; font-weight:600;">
+                <i class="fas fa-check"></i> Создать
+            </button>
+        </div>
+
+    </div>
+</div>
+
+<script src="users.js"></script>
+</body>
+</html>

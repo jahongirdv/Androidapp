@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>JixozMed — Админ-панель</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <link rel="stylesheet" href="sidebar.css" />
+    <link rel="stylesheet" href="admin.css" />
+    <script src="auth.js"></script>
+</head>
+<body>
+
+<aside class="sidebar">
+    <div class="sidebar-panel">
+
+        <button class="sidebar-user" id="sidebarUser" title="Личный кабинет"
+                onclick="window.location.href='profile.html';">
+            <span id="sidebarUserInitials">?</span>
+        </button>
+
+        <button class="sidebar-toggle" title="Свернуть">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+
+        <div class="sidebar-divider"></div>
+
+        <nav class="sidebar-nav">
+            <button class="sidebar-btn" title="Главная"
+                    onclick="window.location.href='dashboard.html';">
+                <i class="fas fa-th-large"></i>
+            </button>
+            <button class="sidebar-btn" title="Форма создания"
+                    onclick="window.location.href='index.html';">
+                <i class="fas fa-list"></i>
+            </button>
+            <button class="sidebar-btn" title="Пользователи"
+                    onclick="window.location.href='users.html';">
+                <i class="fas fa-users"></i>
+            </button>
+        </nav>
+
+        <button class="sidebar-admin active" title="Админ-панель">
+            <i class="fas fa-user-shield"></i>
+        </button>
+
+        <button class="sidebar-logout" title="Выход" onclick="logout();">
+            <i class="fas fa-sign-out-alt"></i>
+        </button>
+
+    </div>
+</aside>
+
+<div class="admin-app">
+    <main class="admin-content">
+
+        <header class="admin-header">
+            <div>
+                <h1>Админ-панель</h1>
+                <p>Управление системой и настройками</p>
+            </div>
+        </header>
+
+        <div class="admin-grid">
+
+            <a class="admin-card" href="users.html">
+                <div class="admin-card-icon admin-icon-users">
+                    <i class="fas fa-users-cog"></i>
+                </div>
+                <div class="admin-card-body">
+                    <h3>Управление пользователями</h3>
+                    <p>Добавление, редактирование и блокировка пользователей</p>
+                </div>
+                <i class="fas fa-chevron-right admin-card-arrow"></i>
+            </a>
+
+            <a class="admin-card" href="organizations.html">
+                <div class="admin-card-icon admin-icon-org">
+                    <i class="fas fa-building"></i>
+                </div>
+                <div class="admin-card-body">
+                    <h3>Организации</h3>
+                    <p>Справочник организаций и районов</p>
+                </div>
+                <i class="fas fa-chevron-right admin-card-arrow"></i>
+            </a>
+
+            <a class="admin-card" href="map.html">
+                <div class="admin-card-icon admin-icon-map">
+                    <i class="fas fa-map-marked-alt"></i>
+                </div>
+                <div class="admin-card-body">
+                    <h3>Карта организаций</h3>
+                    <p>Расположение на карте и ваше местоположение</p>
+                </div>
+                <i class="fas fa-chevron-right admin-card-arrow"></i>
+            </a>
+
+            <a class="admin-card" href="classifier.html">
+                <div class="admin-card-icon admin-icon-class">
+                    <i class="fas fa-tags"></i>
+                </div>
+                <div class="admin-card-body">
+                    <h3>Классификатор</h3>
+                    <p>Разделы, пункты и категории оборудования</p>
+                </div>
+                <i class="fas fa-chevron-right admin-card-arrow"></i>
+            </a>
+
+
+            <a class="admin-card" href="templates.html">
+                <div class="admin-card-icon admin-icon-tpl">
+                    <i class="fas fa-file-word"></i>
+                </div>
+                <div class="admin-card-body">
+                    <h3>Шаблоны документов</h3>
+                    <p>Акты ремонта, списания и перемещения оборудования</p>
+                </div>
+                <i class="fas fa-chevron-right admin-card-arrow"></i>
+            </a>
+
+            <a class="admin-card" href="#" onclick="alert('Раздел в разработке'); return false;">
+                <div class="admin-card-icon admin-icon-log">
+                    <i class="fas fa-history"></i>
+                </div>
+                <div class="admin-card-body">
+                    <h3>Журнал действий</h3>
+                    <p>История изменений и действий пользователей</p>
+                </div>
+                <i class="fas fa-chevron-right admin-card-arrow"></i>
+            </a>
+
+            <a class="admin-card" href="#" onclick="alert('Раздел в разработке'); return false;">
+                <div class="admin-card-icon admin-icon-settings">
+                    <i class="fas fa-cog"></i>
+                </div>
+                <div class="admin-card-body">
+                    <h3>Настройки системы</h3>
+                    <p>Основные параметры приложения</p>
+                </div>
+                <i class="fas fa-chevron-right admin-card-arrow"></i>
+            </a>
+
+        </div>
+
+    </main>
+</div>
+
+<script src="admin.js"></script>
+</body>
+</html>

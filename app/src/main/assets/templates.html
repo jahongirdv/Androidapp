@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>JixozMed — Шаблоны документов</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <link rel="stylesheet" href="sidebar.css" />
+    <link rel="stylesheet" href="admin.css" />
+    <link rel="stylesheet" href="templates.css" />
+    <script src="auth.js"></script>
+</head>
+<body>
+
+<aside class="sidebar">
+    <div class="sidebar-panel">
+
+        <button class="sidebar-user" id="sidebarUser" title="Личный кабинет"
+                onclick="window.location.href='profile.html';">
+            <span id="sidebarUserInitials">?</span>
+        </button>
+
+        <button class="sidebar-toggle" title="Свернуть">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+
+        <div class="sidebar-divider"></div>
+
+        <nav class="sidebar-nav">
+            <button class="sidebar-btn" title="Главная"
+                    onclick="window.location.href='dashboard.html';">
+                <i class="fas fa-th-large"></i>
+            </button>
+            <button class="sidebar-btn" title="Форма создания"
+                    onclick="window.location.href='index.html';">
+                <i class="fas fa-list"></i>
+            </button>
+            <button class="sidebar-btn" title="Пользователи"
+                    onclick="window.location.href='users.html';">
+                <i class="fas fa-users"></i>
+            </button>
+        </nav>
+
+        <button class="sidebar-admin active" title="Админ-панель"
+                onclick="window.location.href='admin.html';">
+            <i class="fas fa-user-shield"></i>
+        </button>
+
+        <button class="sidebar-logout" title="Выход" onclick="logout();">
+            <i class="fas fa-sign-out-alt"></i>
+        </button>
+
+    </div>
+</aside>
+
+<div class="admin-app">
+    <main class="admin-content">
+
+        <header class="admin-header">
+            <div>
+                <h1>Шаблоны документов</h1>
+                <p>Готовые акты для скачивания и заполнения в Word</p>
+            </div>
+        </header>
+
+        <div class="tpl-toolbar">
+            <label class="tpl-field">
+                <span>Организация</span>
+                <select id="tplOrgSelect">
+                    <option value="">— выберите из списка —</option>
+                </select>
+            </label>
+
+
+
+        </div>
+
+        <div class="tpl-grid">
+
+            <div class="tpl-card">
+                <div class="admin-card-icon admin-icon-wo">
+                    <i class="fas fa-minus-circle"></i>
+                </div>
+                <div class="tpl-card-body">
+                    <h3>Акт списания оборудования</h3>
+                </div>
+                <button class="tpl-download" onclick="downloadDocxTemplate('writeoff')">
+                    <i class="fas fa-file-word"></i> Скачать .docx
+                </button>
+            </div>
+
+        </div>
+
+        <div class="tpl-hint">
+            <i class="fas fa-info-circle"></i>
+            Файл откроется в Word — отредактируйте поля и сохраните.
+            Если выбрали организацию, её название подставится в шапку автоматически.
+        </div>
+
+    </main>
+</div>
+
+<script src="supabase-client.js"></script>
+<script src="templates.js"></script>
+</body>
+</html>

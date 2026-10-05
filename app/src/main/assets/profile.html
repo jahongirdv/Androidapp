@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>JixozMed — Личный кабинет</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <link rel="stylesheet" href="profile.css" />
+    <link rel="stylesheet" href="sidebar.css" />
+    <script src="auth.js"></script>
+</head>
+<body>
+
+<aside class="sidebar">
+    <div class="sidebar-panel">
+
+        <!-- Аватар текущего пользователя -->
+        <button class="sidebar-user" id="sidebarUser" title="Личный кабинет"
+                onclick="window.location.href='profile.html';">
+            <span id="sidebarUserInitials">?</span>
+        </button>
+
+        <button class="sidebar-toggle" title="Свернуть">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+
+        <div class="sidebar-divider"></div>
+
+        <!-- Основная навигация -->
+        <nav class="sidebar-nav">
+            <button class="sidebar-btn" title="Главная"
+                    onclick="window.location.href='dashboard.html';">
+                <i class="fas fa-th-large"></i>
+            </button>
+            <button class="sidebar-btn" title="Форма создания"
+                    onclick="window.location.href='index.html';">
+                <i class="fas fa-list"></i>
+            </button>
+            <button class="sidebar-btn" title="Пользователи"
+                    onclick="window.location.href='users.html';">
+                <i class="fas fa-users"></i>
+            </button>
+        </nav>
+
+        <!-- Кнопка администратора (перед выходом) -->
+        <button class="sidebar-admin" title="Админ-панель"
+                onclick="window.location.href='admin.html';">
+            <i class="fas fa-user-shield"></i>
+        </button>
+
+        <!-- Кнопка выхода -->
+        <button class="sidebar-logout" title="Выход" onclick="logout();">
+            <i class="fas fa-sign-out-alt"></i>
+        </button>
+
+    </div>
+</aside>
+
+<div class="profile-app">
+    <main class="profile-content">
+
+        <!-- Шапка профиля -->
+        <div class="profile-header-card">
+            <div class="profile-avatar-big" id="profileAvatarBig">?</div>
+            <div class="profile-info">
+                <h1 id="profileName">Пользователь</h1>
+                <div class="profile-role" id="profileRole">Роль</div>
+                <div class="profile-region" id="profileRegion"></div>
+            </div>
+        </div>
+
+        <!-- Личные данные -->
+        <div class="profile-section">
+            <h2>Личные данные</h2>
+
+            <div class="profile-row">
+                <span class="profile-label">Логин</span>
+                <span class="profile-value" id="profileLogin">—</span>
+            </div>
+
+            <div class="profile-row">
+                <span class="profile-label">Ф.И.О.</span>
+                <span class="profile-value" id="profileFullName">—</span>
+            </div>
+
+            <div class="profile-row">
+                <span class="profile-label">Роль</span>
+                <span class="profile-value" id="profileRole2">—</span>
+            </div>
+
+            <div class="profile-row">
+                <span class="profile-label">Регион</span>
+                <span class="profile-value" id="profileRegion2">—</span>
+            </div>
+        </div>
+
+        <!-- Действия -->
+        <div class="profile-section">
+            <h2>Действия</h2>
+
+            <button class="profile-action" onclick="alert('Смена пароля (в разработке)');">
+                <i class="fas fa-key"></i>
+                <div class="profile-action-text">
+                    <span class="profile-action-name">Сменить пароль</span>
+                    <span class="profile-action-desc">Обновить пароль для входа</span>
+                </div>
+                <i class="fas fa-chevron-right profile-action-arrow"></i>
+            </button>
+
+            <button class="profile-action" onclick="alert('Настройки (в разработке)');">
+                <i class="fas fa-cog"></i>
+                <div class="profile-action-text">
+                    <span class="profile-action-name">Настройки</span>
+                    <span class="profile-action-desc">Уведомления и параметры</span>
+                </div>
+                <i class="fas fa-chevron-right profile-action-arrow"></i>
+            </button>
+
+            <button class="profile-action profile-action-logout" onclick="logout();">
+                <i class="fas fa-sign-out-alt"></i>
+                <div class="profile-action-text">
+                    <span class="profile-action-name">Выйти из системы</span>
+                    <span class="profile-action-desc">Завершить текущую сессию</span>
+                </div>
+                <i class="fas fa-chevron-right profile-action-arrow"></i>
+            </button>
+        </div>
+
+    </main>
+</div>
+
+<script src="profile.js"></script>
+</body>
+</html>

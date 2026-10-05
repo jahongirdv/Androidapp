@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>JixozMed — Классификатор</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <link rel="stylesheet" href="classifier.css" />
+    <link rel="stylesheet" href="sidebar.css" />
+    <link rel="stylesheet" href="layout-fix.css" />
+    <script src="auth.js"></script>
+</head>
+<body>
+
+<aside class="sidebar">
+    <div class="sidebar-panel">
+
+        <button class="sidebar-user" id="sidebarUser" title="Личный кабинет"
+                onclick="window.location.href='profile.html';">
+            <span id="sidebarUserInitials">?</span>
+        </button>
+
+        <button class="sidebar-toggle" title="Свернуть">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+
+        <div class="sidebar-divider"></div>
+
+        <nav class="sidebar-nav">
+            <button class="sidebar-btn" title="Главная"
+                    onclick="window.location.href='dashboard.html';">
+                <i class="fas fa-th-large"></i>
+            </button>
+            <button class="sidebar-btn" title="Форма создания"
+                    onclick="window.location.href='index.html';">
+                <i class="fas fa-list"></i>
+            </button>
+            <button class="sidebar-btn" title="Пользователи"
+                    onclick="window.location.href='users.html';">
+                <i class="fas fa-users"></i>
+            </button>
+        </nav>
+
+        <button class="sidebar-admin active" title="Админ-панель"
+                onclick="window.location.href='admin.html';">
+            <i class="fas fa-user-shield"></i>
+        </button>
+
+        <button class="sidebar-logout" title="Выход" onclick="logout();">
+            <i class="fas fa-sign-out-alt"></i>
+        </button>
+
+    </div>
+</aside>
+
+<div class="classifier-app">
+    <main class="classifier-content">
+
+        <header class="classifier-header">
+            <div>
+                <h1>Классификатор оборудования</h1>
+                <p>Справочник разделов, пунктов и категорий</p>
+            </div>
+            <button class="classifier-refresh" id="refreshBtn" onclick="loadAndRender();">
+                <i class="fas fa-sync-alt"></i> Обновить
+            </button>
+        </header>
+
+        <div class="classifier-toolbar">
+            <div class="classifier-search">
+                <i class="fas fa-search"></i>
+                <input type="text" id="searchInput" placeholder="Поиск по названию..." />
+            </div>
+            <select class="classifier-filter" id="sectionFilter">
+                <option value="">Все классификации</option>
+            </select>
+        </div>
+
+        <div id="loadingBox" class="classifier-loading">
+            <i class="fas fa-spinner fa-spin"></i> Загрузка справочника...
+        </div>
+
+        <div id="statsBox" class="classifier-stats" style="display:none;"></div>
+
+        <div id="groupedBox" class="classifier-groups" style="display:none;"></div>
+
+    </main>
+</div>
+
+<script src="supabase-client.js"></script>
+<script src="classifier.js"></script>
+</body>
+</html>

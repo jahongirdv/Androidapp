@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>JixozMed — Вход</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <link rel="stylesheet" href="login.css" />
+</head>
+<body>
+
+<div class="login-wrap">
+
+    <!-- Логотип -->
+    <div class="login-logo">
+        <i class="fas fa-cube"></i>
+    </div>
+    <h1 class="login-title">JixozMed</h1>
+    <p class="login-subtitle">Система учёта медицинского оборудования</p>
+
+    <!-- ===== ШАГ 1: Логин и пароль ===== -->
+    <div id="step1" class="login-card">
+        <h2>Вход в систему</h2>
+
+        <div class="login-field">
+            <label>Логин</label>
+            <div class="login-input-wrap">
+                <i class="fas fa-user"></i>
+                <input type="text" id="loginInput" placeholder="Введите логин" autocomplete="username" />
+            </div>
+        </div>
+
+        <div class="login-field">
+            <label>Пароль</label>
+            <div class="login-input-wrap">
+                <i class="fas fa-lock"></i>
+                <input type="password" id="passwordInput" placeholder="Введите пароль" autocomplete="current-password" />
+                <button type="button" class="login-eye" onclick="togglePassword()">
+                    <i class="fas fa-eye" id="eyeIcon"></i>
+                </button>
+            </div>
+        </div>
+
+        <button class="login-btn" id="loginBtn" onclick="submitLogin()">
+            <i class="fas fa-sign-in-alt"></i> Войти
+        </button>
+
+        <div class="login-error" id="loginError"></div>
+    </div>
+
+    <!-- ===== ШАГ 2: SMS-код ===== -->
+    <div id="step2" class="login-card" style="display:none;">
+        <h2>Подтверждение входа</h2>
+        <p class="login-hint">Мы отправили код на номер <strong id="phoneDisplay">+998 ** *** ** **</strong></p>
+
+        <div class="login-field">
+            <label>Код из SMS</label>
+            <div class="login-input-wrap">
+                <i class="fas fa-sms"></i>
+                <input type="tel" id="smsInput" placeholder="Введите 4-значный код" maxlength="4"
+                       inputmode="numeric" autocomplete="one-time-code" />
+            </div>
+        </div>
+
+        <button class="login-btn" id="smsBtn" onclick="submitSms()">
+            <i class="fas fa-check"></i> Подтвердить
+        </button>
+
+        <div class="login-error" id="smsError"></div>
+
+        <div class="login-resend">
+            <button type="button" class="login-link" id="resendBtn" onclick="resendSms()" disabled>
+                Отправить код повторно
+            </button>
+            <span id="resendTimer"></span>
+        </div>
+
+        <button type="button" class="login-back" onclick="backToStep1()">
+            <i class="fas fa-arrow-left"></i> Назад
+        </button>
+    </div>
+
+</div>
+
+<script src="login.js"></script>
+</body>
+</html>
