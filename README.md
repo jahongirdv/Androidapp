@@ -4,10 +4,17 @@
 
 Создано как **демо-прототип**, чтобы показать руководству, как платформа выглядит на планшете.
 
-![Превью приложения](./screenshots/demo2.gif)
+<p align="center">
+  <img src="https://img.shields.io/badge/Platform-Android-3DDC84?style=for-the-badge&logo=android&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Language-Kotlin-7F52FF?style=for-the-badge&logo=kotlin&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Status-Demo-orange?style=for-the-badge"/>
+</p>
+
+<p align="center">
+  <img src="./screenshots/demo2.gif" width="70%" />
+</p>
 
 ---
-
 ## 🎯 Назначение
 
 Это **демонстрационный прототип**, а не продакшн-приложение. Его цель — показать, как веб-версия JixozMed переносится на планшетный интерфейс, для презентации руководству.
