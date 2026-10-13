@@ -1,0 +1,142 @@
+.header * {
+  margin: 0;
+  padding: 0;
+}
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--sb-border-color-thin);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.205);
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--sb-header-height, 70px);
+  background-color: white;
+  color: var(--primary);
+  z-index: 5;
+}
+
+.header-content {
+  padding: 1rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin: auto;
+  max-width: var(--sb-max-content-width);
+}
+
+.header-side {
+  flex-shrink: 0;
+}
+
+.header-left {
+  margin-right: 1rem;
+  color: var(--primary);
+}
+
+.header-right ul {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.header-right ul li {
+  width: 100%;
+  text-align: center;
+}
+
+.header-main {
+  flex: 1;
+  text-align: center;
+  color: var(--primary);
+}
+
+.header-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #2c5282;
+  margin: 0;
+}
+
+.header-subtitle {
+  font-size: 0.875rem;
+  margin: 0;
+}
+
+header svg {
+  width: 24px;
+}
+
+header .header-logo {
+  display: flex;
+  align-items: center;
+}
+
+.menu-toggle {
+  display: block;
+  background: none;
+}
+
+.navbar {
+  display: none;
+  flex-direction: column;
+  position: absolute;
+  top: 100%;
+  width: 200px;
+  right: 0;
+  background: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+}
+
+.navbar ul > *:not(:last-child) {
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 16px;
+  margin-bottom: 16px;
+}
+
+.navbar.open {
+  display: flex;
+  padding: 16px;
+  min-width: 100px;
+}
+
+/* On larger screens show navbar normally */
+@media (min-width: 769px) {
+  .navbar {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    position: unset;
+    width: 100%;
+    box-shadow: none;
+  }
+
+  .header-right ul {
+    flex-direction: row;
+    gap: 8px;
+  }
+
+  .navbar ul > *:not(:last-child) {
+    border: 0;
+    margin: 0;
+    padding: 0;
+  }
+
+  .menu-toggle {
+    display: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+}

@@ -1,0 +1,22 @@
+.cart-btn {
+  display: flex;
+  box-sizing: content-box;
+  padding: 12px;
+}
+.cart-btn:has(span) {
+  padding: 12px 8px;
+}
+.cart-btn-total {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  font-weight: 800;
+  top: -4px;
+  right: 4px;
+  background-color: white;
+  color: var(--primary, black);
+  border-radius: 100%;
+  width: 20px;
+  height: 20px;
+}

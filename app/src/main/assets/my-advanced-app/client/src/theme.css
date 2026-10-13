@@ -1,0 +1,5 @@
+@theme {
+  --color-primary: hsl(var(--primary));
+  --color-primaryDark: var(--primaryDark);
+  --color-bgprimary: var(--bgPrimary);
+}

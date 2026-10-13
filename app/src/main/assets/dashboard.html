@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <title>JixozMed — Дашборд</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
-    <link rel="stylesheet" href="dashboard.css" />
-    <link rel="stylesheet" href="sidebar.css" />
-    <script src="auth.js"></script>
+    <link rel="stylesheet" href="css/dashboard.css" />
+    <link rel="stylesheet" href="css/sidebar.css" />
+    <script src="js/auth.js"></script>
 </head>
 <body>
 
@@ -62,55 +62,91 @@
 
         <!-- Фильтры -->
         <div class="dash-filters">
-            <select class="dash-filter"><option>Район</option></select>
-            <select class="dash-filter"><option>Организация</option></select>
-            <select class="dash-filter"><option>Классификация</option></select>
-            <select class="dash-filter"><option>Раздел</option></select>
-            <select class="dash-filter"><option>Пункт</option></select>
+            <select class="dash-filter" id="filterDistrict"><option value="">Все районы</option></select>
+            <select class="dash-filter" id="filterOrganization"><option value="">Все организации</option></select>
+            <select class="dash-filter" id="filterClassification"><option value="">Вся классификация</option></select>
+            <select class="dash-filter" id="filterSection"><option value="">Все разделы</option></select>
+            <select class="dash-filter" id="filterPoint"><option value="">Все пункты</option></select>
         </div>
 
         <!-- Статистические карточки -->
         <div class="dash-stats">
-            <div class="stat-card stat-total">
+            <div class="stat-card stat-total" id="cardTotal" style="cursor:pointer;" title="Нажмите, чтобы показать всё оборудование">
                 <div class="stat-icon"><i class="fas fa-clipboard-list"></i></div>
                 <div class="stat-body">
-                    <div class="stat-number">22 153</div>
+                    <div class="stat-number" id="statTotalNumber">0</div>
                     <div class="stat-title">Статистика оборудования</div>
                     <div class="stat-desc">Общее количество устройств в системе</div>
                 </div>
             </div>
 
-            <div class="stat-card stat-working">
+            <div class="stat-card stat-working" id="cardWorking" style="cursor:pointer;" title="Нажмите, чтобы фильтровать рабочие">
                 <div class="stat-icon"><i class="fas fa-check-circle"></i></div>
                 <div class="stat-body">
-                    <div class="stat-number">18 090</div>
+                    <div class="stat-number" id="statWorkingNumber">0</div>
                     <div class="stat-title">В рабочем состоянии</div>
                     <div class="stat-desc">Устройства работают без нарушений</div>
                 </div>
             </div>
 
-            <div class="stat-card stat-repair">
+            <div class="stat-card stat-repair" id="cardRepair" style="cursor:pointer;" title="Нажмите, чтобы фильтровать требующие ремонта">
                 <div class="stat-icon"><i class="fas fa-tools"></i></div>
                 <div class="stat-body">
-                    <div class="stat-number">1 053</div>
+                    <div class="stat-number" id="statRepairNumber">0</div>
                     <div class="stat-title">Нуждается в ремонте</div>
                     <div class="stat-desc">Требуют технического вмешательства</div>
                 </div>
             </div>
 
-            <div class="stat-card stat-broken">
+            <div class="stat-card stat-broken" id="cardBroken" style="cursor:pointer;" title="Нажмите, чтобы фильтровать непригодные">
                 <div class="stat-icon"><i class="fas fa-minus-circle"></i></div>
                 <div class="stat-body">
-                    <div class="stat-number">3 010</div>
+                    <div class="stat-number" id="statBrokenNumber">0</div>
                     <div class="stat-title">Не пригодно для использования</div>
                     <div class="stat-desc">Не используются или списаны</div>
                 </div>
             </div>
         </div>
 
+        <!-- Таблица списка оборудования по выбранным фильтрам -->
+        <div class="dash-table-container" style="margin-top: 28px; background: #0f1e33; border: 1px solid rgba(255, 255, 255, 0.06); border-radius: 18px; padding: 22px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 12px;">
+                <h3 style="font-size: 18px; font-weight: 600; color: #e6edf5;">
+                    <i class="fas fa-list" style="margin-right: 8px; color: #4d94e8;"></i> Список оборудования (<span id="dashTableCount">0</span>)
+                </h3>
+                <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+                    <input type="text" id="dashSearchInput" placeholder="Поиск по наименованию, инвентарному №..." style="padding: 10px 14px; background: #16273d; border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; color: #fff; font-size: 14px; width: 260px;" />
+                    <button id="dashResetFilters" style="padding: 10px 16px; background: rgba(255,255,255,0.08); border: none; border-radius: 10px; color: #94a9c2; cursor: pointer; font-size: 14px; transition: 0.2s;" title="Сбросить все фильтры">
+                        <i class="fas fa-undo" style="margin-right: 6px;"></i>Сброс
+                    </button>
+                </div>
+            </div>
+
+            <div style="overflow-x: auto;">
+                <table style="width: 100%; border-collapse: collapse; font-size: 14px; color: #d0dbe7;">
+                    <thead>
+                        <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.1); text-align: left; color: #7d92ab; font-size: 13px;">
+                            <th style="padding: 12px 10px;">Инв. №</th>
+                            <th style="padding: 12px 10px;">Наименование</th>
+                            <th style="padding: 12px 10px;">Модель</th>
+                            <th style="padding: 12px 10px;">Организация</th>
+                            <th style="padding: 12px 10px;">Район</th>
+                            <th style="padding: 12px 10px;">Состояние</th>
+                        </tr>
+                    </thead>
+                    <tbody id="dashTableBody">
+                        <tr><td colspan="6" style="padding: 20px; text-align: center; color: #7d92ab;">Загрузка данных...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div id="dashPagination" style="display: flex; justify-content: space-between; align-items: center; margin-top: 16px; color: #7d92ab; font-size: 13px; flex-wrap: wrap; gap: 10px;"></div>
+        </div>
+
     </main>
 </div>
 
-<script src="dashboard.js"></script>
+<script src="js/supabase-client.js"></script>
+<script src="js/equipment_rows.js"></script>
+<script src="js/dashboard.js"></script>
 </body>
 </html>

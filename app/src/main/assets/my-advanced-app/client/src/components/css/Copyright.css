@@ -1,0 +1,8 @@
+.sb-copyright p {
+  text-align: center;
+}
+
+.sb-copyright a {
+  color: var(--primary, black);
+  text-decoration: none;
+}

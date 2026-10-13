@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <title>JixozMed — Классификатор</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
-    <link rel="stylesheet" href="classifier.css" />
-    <link rel="stylesheet" href="sidebar.css" />
-    <link rel="stylesheet" href="layout-fix.css" />
-    <script src="auth.js"></script>
+    <link rel="stylesheet" href="css/classifier.css" />
+    <link rel="stylesheet" href="css/sidebar.css" />
+    <link rel="stylesheet" href="css/layout-fix.css" />
+    <script src="js/auth.js"></script>
 </head>
 <body>
 
@@ -61,9 +61,14 @@
                 <h1>Классификатор оборудования</h1>
                 <p>Справочник разделов, пунктов и категорий</p>
             </div>
-            <button class="classifier-refresh" id="refreshBtn" onclick="loadAndRender();">
-                <i class="fas fa-sync-alt"></i> Обновить
-            </button>
+            <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
+                <button class="classifier-add-btn" id="addClassifierBtn" onclick="openAddClassifierModal();" style="padding: 12px 20px; background: #1e5ec9; border: none; color: #fff; border-radius: 12px; font-size: 14px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 8px; transition: 0.15s;">
+                    <i class="fas fa-plus"></i> Добавить
+                </button>
+                <button class="classifier-refresh" id="refreshBtn" onclick="loadAndRender();">
+                    <i class="fas fa-sync-alt"></i> Обновить
+                </button>
+            </div>
         </header>
 
         <div class="classifier-toolbar">
@@ -87,7 +92,60 @@
     </main>
 </div>
 
-<script src="supabase-client.js"></script>
-<script src="classifier.js"></script>
+<!-- ===== МОДАЛЬНОЕ ОКНО "ДОБАВИТЬ В КЛАССИФИКАТОР" ===== -->
+<div id="addClassifierModal" style="display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.75); z-index:999999; align-items:center; justify-content:center; padding:20px;">
+    <div style="width:100%; max-width:520px; background:#0f1e33; border-radius:20px; padding:26px 24px; box-shadow:0 20px 60px rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.08);">
+
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+            <h3 style="font-size:20px; font-weight:600; color:#e6edf5; margin:0;">
+                <i class="fas fa-plus-circle" style="color:#4d94e8; margin-right:8px;"></i> Добавить в классификатор
+            </h3>
+            <button type="button" onclick="closeAddClassifierModal();"
+                    style="width:36px; height:36px; border-radius:50%; background:rgba(255,255,255,0.06); border:none; color:#94a9c2; font-size:16px; cursor:pointer;">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <div style="margin-bottom:16px;">
+            <label style="display:block; font-size:13px; color:#94a9c2; margin-bottom:6px; font-weight:500;">
+                Классификация
+            </label>
+            <input type="text" id="newClassifierSection" list="existingSectionsList" placeholder="Например: Диагностическая аппаратура и системы мониторинга" style="width:100%; padding:12px 16px; background:#16273d; border:1px solid rgba(255,255,255,0.1); border-radius:12px; color:#fff; font-size:14px; outline:none;" />
+            <datalist id="existingSectionsList"></datalist>
+        </div>
+
+        <div style="margin-bottom:16px;">
+            <label style="display:block; font-size:13px; color:#94a9c2; margin-bottom:6px; font-weight:500;">
+                Раздел
+            </label>
+            <input type="text" id="newClassifierPoint" list="existingPointsList" placeholder="Например: Приборы для эндоскопии" style="width:100%; padding:12px 16px; background:#16273d; border:1px solid rgba(255,255,255,0.1); border-radius:12px; color:#fff; font-size:14px; outline:none;" />
+            <datalist id="existingPointsList"></datalist>
+        </div>
+
+        <div style="margin-bottom:20px;">
+            <label style="display:block; font-size:13px; color:#94a9c2; margin-bottom:6px; font-weight:500;">
+                Наименование прибора
+            </label>
+            <input type="text" id="newClassifierKey" placeholder="Например: Видеогастроскоп" style="width:100%; padding:12px 16px; background:#16273d; border:1px solid rgba(255,255,255,0.1); border-radius:12px; color:#fff; font-size:14px; outline:none;" />
+        </div>
+
+        <div id="addClassifierError" style="display:none; color:#ff6b6b; font-size:13px; margin-bottom:16px; padding:10px 14px; background:rgba(255,107,107,0.1); border-radius:10px;"></div>
+
+        <div style="display:flex; gap:12px;">
+            <button type="button" onclick="closeAddClassifierModal();"
+                    style="flex:1; padding:12px; background:transparent; border:1px solid rgba(255,255,255,0.1); color:#94a9c2; border-radius:12px; font-size:14px; cursor:pointer;">
+                Отмена
+            </button>
+            <button type="button" id="saveClassifierBtn" onclick="saveNewClassifierItem();"
+                    style="flex:1; padding:12px; background:#1e5ec9; border:none; color:white; border-radius:12px; font-size:14px; cursor:pointer; font-weight:600; display:flex; align-items:center; justify-content:center; gap:8px;">
+                <i class="fas fa-check"></i> Сохранить
+            </button>
+        </div>
+
+    </div>
+</div>
+
+<script src="js/supabase-client.js"></script>
+<script src="js/classifier.js"></script>
 </body>
 </html>

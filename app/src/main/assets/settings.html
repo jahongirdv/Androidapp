@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>JixozMed — Настройки системы</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <link rel="stylesheet" href="css/sidebar.css" />
+    <link rel="stylesheet" href="css/settings.css" />
+    <script src="js/auth.js"></script>
+</head>
+<body>
+
+<aside class="sidebar">
+    <div class="sidebar-panel">
+
+        <button class="sidebar-user" id="sidebarUser" title="Личный кабинет"
+                onclick="window.location.href='profile.html';">
+            <span id="sidebarUserInitials">?</span>
+        </button>
+
+        <button class="sidebar-toggle" title="Свернуть">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+
+        <div class="sidebar-divider"></div>
+
+        <nav class="sidebar-nav">
+            <button class="sidebar-btn" title="Главная"
+                    onclick="window.location.href='dashboard.html';">
+                <i class="fas fa-th-large"></i>
+            </button>
+            <button class="sidebar-btn" title="Форма создания"
+                    onclick="window.location.href='index.html';">
+                <i class="fas fa-list"></i>
+            </button>
+            <button class="sidebar-btn" title="Пользователи"
+                    onclick="window.location.href='users.html';">
+                <i class="fas fa-users"></i>
+            </button>
+        </nav>
+
+        <button class="sidebar-admin active" title="Админ-панель"
+                onclick="window.location.href='admin.html';">
+            <i class="fas fa-user-shield"></i>
+        </button>
+
+        <button class="sidebar-logout" title="Выход" onclick="logout();">
+            <i class="fas fa-sign-out-alt"></i>
+        </button>
+
+    </div>
+</aside>
+
+<div class="admin-app">
+    <main class="admin-content">
+
+        <header class="admin-header">
+            <div>
+                <h1>Настройки системы</h1>
+                <p>Параметры подключения к серверу и конфигурация базы данных</p>
+            </div>
+            <button class="settings-btn secondary" onclick="window.location.href='admin.html';">
+                <i class="fas fa-arrow-left"></i> В админ-панель
+            </button>
+        </header>
+
+        <!-- БЛОК 1: БАЗА ДАННЫХ И СЕРВЕР SUPABASE -->
+        <section class="settings-section">
+            <div class="settings-section-header">
+                <div class="settings-section-icon">
+                    <i class="fas fa-database"></i>
+                </div>
+                <div class="settings-section-title">
+                    <h2>База данных и Сервер (Supabase)</h2>
+                    <p>Проверка связи с сервером, управление ключами и задержкой сети</p>
+                </div>
+            </div>
+
+            <!-- Карточки состояния -->
+            <div class="status-cards-grid">
+                <div class="status-card">
+                    <span class="status-card-label">Статус соединения</span>
+                    <span class="status-card-value" id="connectionStatusVal">
+                        <i class="fas fa-spinner fa-spin"></i> Проверка...
+                    </span>
+                </div>
+
+                <div class="status-card">
+                    <span class="status-card-label">Задержка сети (Ping)</span>
+                    <span class="status-card-value" id="connectionPingVal">—</span>
+                </div>
+
+                <div class="status-card">
+                    <span class="status-card-label">Последняя проверка</span>
+                    <span class="status-card-value" id="lastSyncTimeVal" style="font-size:14px; font-weight:500; color:#94a9c2;">
+                        Не проводилась
+                    </span>
+                </div>
+            </div>
+
+            <!-- Поля ввода ключей -->
+            <div class="settings-form-grid">
+                <div class="settings-field">
+                    <label for="supabaseUrlInput">Supabase REST URL</label>
+                    <input type="text" id="supabaseUrlInput" placeholder="https://xxx.supabase.co" />
+                </div>
+
+                <div class="settings-field">
+                    <label for="supabaseKeyInput">Publishable / Anon API Key</label>
+                    <input type="text" id="supabaseKeyInput" placeholder="sb_publishable_xxx..." />
+                </div>
+            </div>
+
+            <!-- Кнопки действий -->
+            <div class="settings-actions">
+                <button class="settings-btn primary" id="testConnectionBtn" onclick="testSupabaseConnection()">
+                    <i class="fas fa-plug"></i> Проверить связь с сервером
+                </button>
+                <button class="settings-btn success" id="saveSupabaseBtn" onclick="saveSupabaseConfig()">
+                    <i class="fas fa-save"></i> Сохранить настройки
+                </button>
+                <button class="settings-btn secondary" id="resetSupabaseBtn" onclick="resetSupabaseConfig()">
+                    <i class="fas fa-undo"></i> Сбросить на стандартные
+                </button>
+            </div>
+
+            <!-- Лог результатов проверки -->
+            <div class="settings-log-box" id="connectionLogBox"></div>
+        </section>
+
+    </main>
+</div>
+
+<script src="js/supabase-client.js"></script>
+<script src="js/settings.js"></script>
+</body>
+</html>

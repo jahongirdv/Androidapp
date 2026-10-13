@@ -1,0 +1,10 @@
+.sb-nav a {
+  color: var(--primary);
+  padding: 8px;
+}
+
+.sb-nav a.active:not(:has(svg)),
+.sb-nav a:hover:not(:has(svg)) {
+  font-weight: bold;
+  border: 1px solid;
+}

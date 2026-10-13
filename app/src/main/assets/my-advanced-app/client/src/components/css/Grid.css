@@ -1,0 +1,17 @@
+.compassion-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(var(--cols-mobile), 1fr);
+}
+
+@media (min-width: 600px) {
+  .compassion-grid {
+    grid-template-columns: repeat(var(--cols-tablet), 1fr);
+  }
+}
+
+@media (min-width: 900px) {
+  .compassion-grid {
+    grid-template-columns: repeat(var(--cols-desktop), 1fr);
+  }
+}
