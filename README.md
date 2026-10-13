@@ -10,6 +10,14 @@
   <img src="https://img.shields.io/badge/Status-Demo-orange?style=for-the-badge"/>
 </p>
 
+
+<p align="center">
+  <a href="https://github.com/jahongirdv/Androidapp/releases/latest">
+    <img src="https://img.shields.io/badge/⬇_Скачать_APK-3DDC84?style=for-the-badge&logo=android&logoColor=white" />
+  </a>
+</p>
+
+
 <p align="center">
   <img src="./screenshots/demo2.gif" width="70%" />
 </p>
