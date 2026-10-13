@@ -30,10 +30,24 @@
 - **Target SDK:** 34
 
 ## 📱 Скриншоты
+<p align="center">
+  <img src="./screenshots/1.jpg" width="40%" />
+  <img src="./screenshots/2.jpg" width="40%" />
+</p>
 
-| Главный экран | Список оборудования | Детали |
-|---|---|---|
-| ![](./screenshots/1.png) | ![](./screenshots/2.png) | ![](./screenshots/3.png) |
+<p align="center">
+  <img src="./screenshots/3.jpg" width="40%" />
+  <img src="./screenshots/4.jpg" width="40%" />
+</p>
+
+<p align="center">
+  <img src="./screenshots/5.jpg" width="40%" />
+  <img src="./screenshots/6.jpg" width="40%" />
+</p>
+
+<p align="center">
+  <img src="./screenshots/7.jpg" width="40%" />
+</p>
 
 ## 🚀 Сборка и запуск
 
