@@ -13,3 +13,14 @@
 .externalNativeBuild
 .cxx
 local.properties
+
+# ============================================================
+# jixozmed-new (Node + React)
+# ============================================================
+jixozmed-new/node_modules/
+jixozmed-new/*/node_modules/
+jixozmed-new/*/.env
+jixozmed-new/*/dist/
+jixozmed-new/*/build/
+jixozmed-new/*.log
+jixozmed-new/.env

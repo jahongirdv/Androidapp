@@ -1,0 +1,115 @@
+.admin-content {
+    padding: 0;
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.admin-header { margin-bottom: 28px; }
+
+.admin-header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    color: #e6edf5;
+    margin: 0 0 6px;
+    letter-spacing: -0.3px;
+}
+
+.admin-header p {
+    font-size: 14px;
+    color: #7d92ab;
+    margin: 0;
+}
+
+.admin-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    grid-auto-rows: 1fr;
+}
+
+.admin-card {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    background: #0f1e33;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 18px;
+    padding: 22px 24px;
+    text-decoration: none;
+    color: inherit;
+    transition: 0.15s;
+    cursor: pointer;
+    min-height: 104px;
+    font-family: inherit;
+    text-align: left;
+    width: 100%;
+}
+
+.admin-card:hover {
+    background: #142640;
+    border-color: rgba(155, 89, 182, 0.35);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.admin-card-icon {
+    width: 56px;
+    height: 56px;
+    min-width: 56px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    flex-shrink: 0;
+}
+
+.admin-icon-users    { background: rgba(77, 148, 232, 0.15);  color: #4d94e8; }
+.admin-icon-tpl      { background: rgba(185, 123, 209, 0.18); color: #d6a6e8; }
+.admin-icon-org      { background: rgba(46, 204, 113, 0.15);  color: #2ecc71; }
+.admin-icon-map      { background: rgba(52, 152, 219, 0.15);  color: #3498db; }
+.admin-icon-class    { background: rgba(241, 196, 15, 0.15);  color: #f1c40f; }
+.admin-icon-log      { background: rgba(231, 76, 60, 0.15);   color: #ff8a80; }
+.admin-icon-settings { background: rgba(155, 89, 182, 0.15);  color: #b97bd1; }
+
+.admin-card-body { flex: 1; min-width: 0; }
+
+.admin-card-body h3 {
+    font-size: 16px;
+    font-weight: 600;
+    color: #e6edf5;
+    margin: 0 0 4px;
+    line-height: 1.3;
+}
+
+.admin-card-body p {
+    font-size: 13px;
+    color: #7d92ab;
+    line-height: 1.4;
+    margin: 0;
+}
+
+.admin-card-arrow {
+    color: #4a6280;
+    font-size: 14px;
+    flex-shrink: 0;
+    transition: 0.15s;
+}
+
+.admin-card:hover .admin-card-arrow {
+    color: #b97bd1;
+    transform: translateX(3px);
+}
+
+@media (max-width: 900px) {
+    .admin-header h1 { font-size: 22px; }
+    .admin-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 700px) {
+    .admin-card { padding: 18px; gap: 14px; min-height: 92px; }
+    .admin-card-icon { width: 48px; height: 48px; min-width: 48px; font-size: 20px; }
+    .admin-card-body h3 { font-size: 15px; }
+    .admin-card-body p { font-size: 12px; }
+}

@@ -1,0 +1,357 @@
+/* ============================================================
+   Тулбар
+   ============================================================ */
+.map-toolbar {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 16px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.map-search {
+    flex: 1;
+    position: relative;
+    display: flex;
+    align-items: center;
+    min-width: 200px;
+    z-index: 1000;
+}
+
+.map-search > i {
+    position: absolute;
+    left: 14px;
+    color: #4a6280;
+    font-size: 13px;
+    pointer-events: none;
+}
+
+.map-search input {
+    width: 100%;
+    background: #0f1e33;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 12px;
+    padding: 12px 42px 12px 40px;
+    color: #e6edf5;
+    font-size: 14px;
+    font-family: inherit;
+    outline: none;
+    transition: 0.15s;
+    box-sizing: border-box;
+}
+
+.map-search input:focus {
+    border-color: rgba(185, 123, 209, 0.5);
+    background: #142640;
+}
+
+.map-search input::placeholder { color: #4a6280; }
+
+.map-btn {
+    background: #0f1e33;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 12px;
+    padding: 12px 18px;
+    color: #e6edf5;
+    font-size: 14px;
+    font-family: inherit;
+    cursor: pointer;
+    transition: 0.15s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.map-btn:hover {
+    background: #142640;
+    border-color: rgba(185, 123, 209, 0.4);
+}
+
+.map-btn:active { transform: scale(0.97); }
+
+.map-btn i { color: #b97bd1; font-size: 13px; }
+
+.map-btn.loading i { animation: spin 0.8s linear infinite; }
+
+.map-btn.active {
+    background: rgba(185, 123, 209, 0.2);
+    border-color: rgba(185, 123, 209, 0.6);
+}
+
+.map-btn.primary {
+    background: #b97bd1;
+    border-color: #b97bd1;
+    color: #fff;
+}
+
+.map-btn.primary i { color: #fff; }
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Инфо-плашка */
+.map-info {
+    background: #0f1e33;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 12px;
+    padding: 14px 18px;
+    font-size: 13px;
+    color: #b6c7da;
+    line-height: 1.6;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    min-height: 46px;
+}
+
+.map-info > i { color: #b97bd1; margin-top: 3px; flex-shrink: 0; }
+
+.map-info.active { border-color: rgba(46, 204, 113, 0.35); }
+.map-info.active > i { color: #2ecc71; }
+
+.map-info.error { border-color: rgba(231, 76, 60, 0.35); }
+.map-info.error > i { color: #e74c3c; }
+
+.map-info-content { flex: 1; min-width: 0; }
+
+.map-info-addr {
+    color: #e6edf5;
+    font-size: 14px;
+    line-height: 1.4;
+    margin-bottom: 6px;
+}
+
+.map-info-coords {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    font-size: 12px;
+    color: #7d92ab;
+}
+
+.map-info-coords b {
+    color: #8bb8f0;
+    font-weight: 600;
+    font-family: 'SF Mono', 'Roboto Mono', Menlo, monospace;
+}
+
+/* Карта */
+.map-container {
+    width: 100%;
+    height: 600px;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    background: #0f1e33;
+    z-index: 1;
+}
+
+.map-container.add-mode,
+.map-container.add-mode * {
+    cursor: crosshair !important;
+}
+
+/* Метки */
+.marker-pin {
+    background: #4d94e8;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    border: 3px solid #fff;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 14px;
+}
+
+.user-location-marker {
+    background: #e74c3c;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 3px solid #fff;
+    box-shadow: 0 0 0 6px rgba(231, 76, 60, 0.25);
+    animation: userPulse 2s infinite;
+}
+
+@keyframes userPulse {
+    0%   { box-shadow: 0 0 0 0 rgba(231, 76, 60, 0.5); }
+    70%  { box-shadow: 0 0 0 18px rgba(231, 76, 60, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(231, 76, 60, 0); }
+}
+
+/* Leaflet — тёмная тема */
+.leaflet-popup-content-wrapper {
+    background: #1a2b45;
+    color: #e6edf5;
+    border-radius: 12px;
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.6);
+}
+
+.leaflet-popup-tip { background: #1a2b45; }
+
+.leaflet-popup-content {
+    font-size: 13px;
+    line-height: 1.5;
+    margin: 12px 14px;
+}
+
+.leaflet-popup-content b {
+    color: #fff;
+    font-size: 14px;
+    display: block;
+    margin-bottom: 6px;
+}
+
+.leaflet-popup-close-button { color: #b6c7da !important; }
+
+.leaflet-control-attribution {
+    background: rgba(10, 22, 40, 0.8) !important;
+    color: #7d92ab !important;
+    font-size: 10px !important;
+}
+
+.leaflet-control-attribution a { color: #4d94e8 !important; }
+
+.leaflet-bar a {
+    background: #0f1e33 !important;
+    color: #e6edf5 !important;
+    border-color: rgba(255, 255, 255, 0.08) !important;
+    width: 34px !important;
+    height: 34px !important;
+    line-height: 34px !important;
+}
+
+.leaflet-bar a:hover { background: #142640 !important; }
+
+.leaflet-bar {
+    border-radius: 10px !important;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+/* Popup — удаление */
+.popup-delete {
+    margin-top: 10px;
+    padding: 6px 12px;
+    background: rgba(231, 76, 60, 0.15);
+    color: #ff8a80;
+    border: 1px solid rgba(231, 76, 60, 0.4);
+    border-radius: 8px;
+    font-size: 12px;
+    cursor: pointer;
+    font-family: inherit;
+    width: 100%;
+    transition: 0.15s;
+}
+
+.popup-delete:hover { background: rgba(231, 76, 60, 0.3); }
+
+/* Модалки */
+.marker-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(5, 12, 22, 0.75);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    padding: 20px;
+}
+
+.marker-modal.show { display: flex; }
+
+.marker-modal-box {
+    background: #0f1e33;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 18px;
+    padding: 24px 26px;
+    width: 100%;
+    max-width: 420px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    animation: modalIn 0.15s ease-out;
+}
+
+@keyframes modalIn {
+    from { opacity: 0; transform: scale(0.96); }
+    to   { opacity: 1; transform: scale(1); }
+}
+
+.marker-modal-box h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #e6edf5;
+    margin: 0 0 6px;
+}
+
+.marker-modal-coords {
+    font-size: 12px;
+    color: #7d92ab;
+    font-family: 'SF Mono', 'Roboto Mono', Menlo, monospace;
+    margin: 0 0 18px;
+}
+
+.marker-modal-label {
+    display: block;
+    font-size: 12px;
+    color: #7d92ab;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    margin-bottom: 6px;
+    margin-top: 14px;
+}
+
+.marker-modal-label:first-of-type { margin-top: 0; }
+
+.marker-modal-box input,
+.marker-modal-box textarea {
+    width: 100%;
+    background: #0a1628;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    padding: 12px 14px;
+    color: #e6edf5;
+    font-size: 14px;
+    font-family: inherit;
+    outline: none;
+    box-sizing: border-box;
+    transition: 0.15s;
+    resize: vertical;
+}
+
+.marker-modal-box input:focus,
+.marker-modal-box textarea:focus {
+    border-color: rgba(185, 123, 209, 0.6);
+}
+
+.marker-modal-box input::placeholder,
+.marker-modal-box textarea::placeholder {
+    color: #4a6280;
+}
+
+.marker-modal-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.marker-modal-actions .map-btn {
+    flex: 1;
+    justify-content: center;
+}
+
+/* Адаптив */
+@media (max-width: 900px) {
+    .map-container { height: 500px; }
+}
+
+@media (max-width: 700px) {
+    .map-container { height: 400px; }
+    .map-btn { padding: 10px 14px; font-size: 13px; }
+    .map-info { font-size: 12px; padding: 12px 14px; }
+}
